@@ -17,7 +17,7 @@ for (int i = 0; i < notes.Length; i++)
     int month = int.Parse(Console.ReadLine()!);
     Console.Write("Год рождения: ");
     int year = int.Parse(Console.ReadLine()!);
-    notes[i] = new NOTE<string>(lastName,firstName,phone,new int[] { day, month, year });
+    notes[i] = new NOTE<string>(lastName, firstName, phone, new int[] { day, month, year });
 }
 Array.Sort(notes);
 Console.WriteLine("Отсортировано по первым 3 цифрам номера:");
@@ -32,7 +32,7 @@ string search = Console.ReadLine()!;
 bool found = false;
 foreach (var note in notes)
 {
-    if (note.LastName.Equals(search, StringComparison.OrdinalIgnoreCase))
+    if (note.LastName.ToLower() == search.ToLower())
     {
         Console.WriteLine(note);
         found = true;
@@ -56,7 +56,7 @@ class NOTE<T> : ICloneable, IComparable
     }
     public object Clone()
     {
-        return new NOTE<T>(LastName,FirstName,PhoneNumber,(int[])BirthDate.Clone());
+        return new NOTE<T>(LastName, FirstName, PhoneNumber, (int[])BirthDate.Clone());
     }
     public int CompareTo(object? obj)
     {
